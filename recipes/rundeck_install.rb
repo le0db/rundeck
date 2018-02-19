@@ -22,7 +22,7 @@ rdeck.base=/var/lib/rundeck
 rss.enabled=false
 grails.serverURL=http://52.87.202.170:4440
 dataSource.dbCreate = update
-dataSource.url=jdbc:mysql:localhost/rundeck?autoReconnect=true
+dataSource.url=jdbc:mysql://localhost/rundeck?autoReconnect=true
 dataSource.username=rundeckuser
 dataSource.password=123456'
 end
