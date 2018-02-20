@@ -17,14 +17,16 @@ yum_package 'rundeck' do
 end
 
 file '/etc/rundeck/rundeck-config.properties' do
-	content 'loglevel.default=INFO
+	content '
+loglevel.default=INFO
 rdeck.base=/var/lib/rundeck
 rss.enabled=false
-grails.serverURL=http://52.87.202.170:4440
+grails.serverURL=http://52.91.231.62:4440
 dataSource.dbCreate = update
-dataSource.url=jdbc:mysql://localhost/rundeck?autoReconnect=true
+dataSource.url = jdbc:mysql://localhost/rundeck?autoReconnect=true
 dataSource.username=rundeckuser
-dataSource.password=123456'
+dataSource.password=123456
+'
 end
 
 service 'rundeckd' do
