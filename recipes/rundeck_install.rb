@@ -16,19 +16,20 @@ yum_package 'rundeck' do
 	action :install
 end
 
-file '/etc/rundeck/rundeck-config.properties' do
-	content '
-loglevel.default=INFO
-rdeck.base=/var/lib/rundeck
-rss.enabled=false
-grails.serverURL=http://52.91.231.62:4440
-dataSource.dbCreate = update
-dataSource.url = jdbc:mysql://localhost/rundeck?autoReconnect=true
-dataSource.username=rundeckuser
-dataSource.password=123456
-'
-end
-
+bash 'rundeck_config' do
+	code <<-EOH
+		ip=$(curl --silent http://169.254.169.254/latest/meta-data/public-ipv4)
+		sudo rm -rf /etc/rundeck/rundeck-config.properties
+		echo "loglevel.default=INFO" >> /etc/rundeck/rundeck-config.properties
+		echo "rdeck.base=/var/lib/rundeck" >> /etc/rundeck/rundeck-config.properties
+		echo "rss.enabled=false" >> /etc/rundeck/rundeck-config.properties
+		echo "grails.serverURL="$ip":4440" >> /etc/rundeck/rundeck-config.properties
+		echo "dataSource.dbCreate=update" >> /etc/rundeck/rundeck-config.properties
+		echo "dataSource.url=jdbc:mysql://localhost/rundeck?autoReconnect=true" >> /etc/rundeck/rundeck-config.properties
+		echo "dataSource.username=rundeckuser" >> /etc/rundeck/rundeck-config.properties
+		echo "dataSource.password=123456" >> /etc/rundeck/rundeck-config.properties
+		EOH
+		
 service 'rundeckd' do
 	action [ :enable, :start ]
 end
