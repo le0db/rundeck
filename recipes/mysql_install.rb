@@ -8,7 +8,7 @@ execute 'mysql_repo' do
 	command 'rpm -ivh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm'
 end	
 
-yum_package 'mysql-server' do
+yum_package 'mysql-community-server' do
 	action :install
 	version '5.6.39-2.el7'
 end
