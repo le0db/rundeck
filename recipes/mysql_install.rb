@@ -10,6 +10,7 @@ end
 
 yum_package 'mysql-server' do
 	action :install
+	version '5.6.39-2.el7'
 end
 
 service 'mysqld' do	
