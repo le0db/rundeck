@@ -23,12 +23,13 @@ bash 'rundeck_config' do
 		echo "loglevel.default=INFO" >> /etc/rundeck/rundeck-config.properties
 		echo "rdeck.base=/var/lib/rundeck" >> /etc/rundeck/rundeck-config.properties
 		echo "rss.enabled=false" >> /etc/rundeck/rundeck-config.properties
-		echo "grails.serverURL="$ip":4440" >> /etc/rundeck/rundeck-config.properties
+		echo "grails.serverURL=http://"$ip":4440" >> /etc/rundeck/rundeck-config.properties
 		echo "dataSource.dbCreate=update" >> /etc/rundeck/rundeck-config.properties
 		echo "dataSource.url=jdbc:mysql://localhost/rundeck?autoReconnect=true" >> /etc/rundeck/rundeck-config.properties
 		echo "dataSource.username=rundeckuser" >> /etc/rundeck/rundeck-config.properties
 		echo "dataSource.password=123456" >> /etc/rundeck/rundeck-config.properties
 		EOH
+end
 		
 service 'rundeckd' do
 	action [ :enable, :start ]
